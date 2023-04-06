@@ -56,6 +56,10 @@ export class CandidateListComponent implements OnInit {
 
 
 
+/**
+ * This function retrieves a list of candidates from a candidate service and sets the retrieved data as
+ * the data source for a table.
+ */
   getAllCandidates() {
     this.candidateService.getCandidateList().subscribe(data => {
 

@@ -49,6 +49,12 @@ export class JobListComponent implements OnInit {
     });
   }
 
+  /* `openDialog(id:number,name:string): void` is a method that opens a confirmation dialog when the
+  delete button is clicked on a job in the job list. It takes two parameters, `id` and `name`, which
+  are used to display the job's information in the dialog. The `dialog.open()` method opens the
+  `DialogDeleteComponent` component and passes the job's information as data. The
+  `dialogRef.afterClosed()` method subscribes to the dialog's close event and calls the
+  `getAllJobs()` method to refresh the job list after the dialog is closed. */
   openDialog(id:number,name:string): void {
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
       data: {id: id, message: "Are you sure want to delete ",username:name,funId:3},
@@ -61,6 +67,9 @@ export class JobListComponent implements OnInit {
     });
   }
 
+  /* `onDeleteClicked(id:number)` is a method that is called when the delete button is clicked on a job
+  in the job list. It opens a confirmation dialog asking the user if they are sure they want to
+  delete the job. If the user confirms, the `getAllJobs()` method is called to refresh the job list. */
   onDeleteClicked(id:number){
     if(confirm("Are you sure you want to delete ?")){
    

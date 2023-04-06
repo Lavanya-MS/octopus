@@ -42,6 +42,10 @@ export class JobEditComponent implements OnInit {
     this.UpdatedJobScoreCard=this.EditJobData.scoreCard;
     this.UpdatedJobVacancy=this.EditJobData.vacancy;
   }
+  /**
+   * This function updates job details if the number of active candidates is greater than or equal to
+   * the number of dropped candidates.
+   */
   UpdateJobDetails(){
     if(this.UpdatedJobActiveCandidates>=this.UpdatedJobDroppedCandidates){
     let UpdatedJobData: Job ={ 

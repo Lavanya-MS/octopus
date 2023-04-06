@@ -81,6 +81,13 @@ export class CandidateUpdateComponent implements OnInit {
   
     
 
+ /* `UpdateJobDetails()` is a method that updates the details of a candidate. It creates an object
+ `UpdatedCandidateData` with the updated details of the candidate and then calls the
+ `updateCandidate()` method of the `candidateService` to update the candidate in the database. It
+ also displays a success message using the `snackBar` service. The `getSkills()`, `getCountries()`,
+ and `getJobs()` methods are used to fetch the list of skills, countries, and jobs respectively from
+ their respective services. These methods are called in the `ngOnInit()` method to populate the
+ dropdowns in the form. */
   UpdateJobDetails() {
 
     let UpdatedCandidateData: Candidate = {

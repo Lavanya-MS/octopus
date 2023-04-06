@@ -52,6 +52,12 @@ export class JobComponent implements OnInit {
   get f() { return this.jobRegisterForm.controls; }
 
 
+/* The `onSubmit()` function is a method that is called when the user submits the job registration
+form. It first sets the value of the `notification` field in the form to an object containing
+information about the job registration. Then, it sets the `submitted` flag to true and checks if the
+form is valid. If the form is valid, it calls the `createJob()` method of the `jobService` to create
+a new job with the form data. If the job is created successfully, it displays a success message
+using the `openSnackBar()` method and resets the form. If there is an error, it does nothing. */
     onSubmit() {
       //   title:"Job Registration",
       //   body: "New job "+this.f.title.value+" was created by "+this.f.owner.value+".",
