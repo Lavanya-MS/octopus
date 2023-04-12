@@ -31,14 +31,14 @@
   <div class="tab-content" id="ex-with-icons-content">
   
     <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
-      <app-job (jobEvent)="updateChange()"></app-job>
+      <app-job (jobEvent)="updateChange()" ></app-job>
     </div>
     <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
       
       <app-job-list [dataSource]="jobList"></app-job-list>
   </div>
     <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
-      <app-candidate></app-candidate>
+      <app-candidate (candidateChange)="updateChange()" [newJobs]="jobs"></app-candidate>
     </div>
 
 

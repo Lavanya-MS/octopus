@@ -52,6 +52,7 @@ import { AppearanceComponent } from './settings/appearance/appearance.component'
 import { SettingsComponent } from './settings/settings.component';
 import { EventListComponent } from './recruitment/event-list/event-list.component';
 import { NotificationSideBarComponent } from './notification-side-bar/notification-side-bar.component';
+import { AuthService } from '../service/auth.service';
 
 
 @NgModule({
@@ -114,4 +115,8 @@ import { NotificationSideBarComponent } from './notification-side-bar/notificati
   ]
  
 })
-export class HomeModule { }
+export class HomeModule { 
+  constructor(private authService:AuthService){
+    authService.getServerStatus();
+    }
+}

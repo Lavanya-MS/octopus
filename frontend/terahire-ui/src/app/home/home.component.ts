@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { NotificationService } from '../service/notification.service';
-import{Notification} from '../models/notification.model'
+import{ notification} from '../models/notification.model'
+import { UserService } from '../service/user.service';
+
+import { SharedService } from '../service/shared.service';
+
 
 
 
@@ -14,62 +18,75 @@ import{Notification} from '../models/notification.model'
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router,private notificationService:NotificationService,private authService:AuthService) { }
+
+  constructor(private router:Router,private notificationService:NotificationService,private authService:AuthService,private userService:UserService,private sharedService:SharedService) { }
+
   
   activeTab:string = "dahboard";
 
   userType:boolean[]=[];
-  nList!:Notification[];
+  nList!:notification[];
+  userId!:number;
+  notificationCount:any[]=[];
+  notificationCounts:number=0;
 
-  notificationCount!:number;
+ 
   
 
   ngOnInit(): void {
     //console.log( this.router.url.split('/')[2])
+    this.getUserId();
     this.activeTab =  this.router.url.split('/')[2]
-
-
-    this.getNotifications();
-
     this.authService.getServerStatus();
     this.userType = this.authService.getUserTypes();
+
+    this.sharedService.notificationUpdate.subscribe(val=>{
+      if(val){
+        this.getNotifications();
+      }
+    })
+
+    
    // console.log(this.userType)
 
   }
 
-
-  getNotifications(){
-    this.notificationService.getNotifications().subscribe(data => {
-      this.nList = data;
-      this.notificationCount=0;
-      this.nList.forEach((obj)=>{
-        if(obj.notificationType==0){
-          this.notificationCount+=1;
-        }
-      })
+  getUserId(){
+    this.userService.getUserByEmail(this.authService.getUserId()).subscribe(data=>{
+     
+      this.userId = data.id;
+      this.getNotifications();
     })
-    
   }
 
 
-  // updating notificationStatustype to 1 by update API
-  updateNotification(id:number){
-    this.notificationService.updateNotificationStatus(id).subscribe((result:any)=>{
+  getNotifications(){
+    this.notificationCount =[]
+    this.notificationCounts =0;
+    this.nList = [];
+    this.notificationService.getNotifications().subscribe(data => {
+      this.nList = data;
+      
+      data.forEach((obj,i)=>{
+       
+        obj.notificationStatus.forEach((v:number)=>{
+        // console.log(v+" "+this.userId)
+          if(v == this.userId){
+            // console.log(v)
+            this.notificationCount.push(true);
+            
+          }
+        })
+      })
+      this.notificationCounts = this.nList.length - this.notificationCount.length;
 
-      this.getNotifications()
-      //window.location.reload();
     })
+ 
   }
   logOut(){
     this.authService.logout();
 
   }
-
-
-
-
-  
-
   Logout(){
 
     this.authService.logout();
@@ -77,4 +94,7 @@ export class HomeComponent implements OnInit {
 
   }
  
+  ngOnDestroy(){
+    this.sharedService.notificationUpdate.unsubscribe()
+  }
 }

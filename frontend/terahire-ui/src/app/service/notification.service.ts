@@ -24,8 +24,8 @@ export class NotificationService {
     // return this.httpClient.get(this.baseURL+'/list',{headers:this.header})
     return this.httpClient.get(this.baseURL + '/list', {  });
   }
-  updateNotificationStatus(id): Observable<any>{
-    return this.httpClient.put(this.baseURL + '/update/'+ id, {  });
+  updateNotificationStatus(id,userId): Observable<any>{
+    return this.httpClient.put(this.baseURL + '/update/'+ id+"/"+userId, {  });
 
   }
 }

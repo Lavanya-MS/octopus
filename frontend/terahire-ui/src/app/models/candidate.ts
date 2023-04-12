@@ -1,3 +1,5 @@
+import { Job } from "./job";
+
 export class Candidate {
     id!:number;
     fullName!: string;
@@ -17,8 +19,8 @@ export class Candidate {
     skills!:string;
     sociaLink!:string;
     status!:string
-    dob!:Date
-    designation!:string;
+    dob!:Date;
+    designation!:Job[];
     score!:string;
 
 

@@ -300,9 +300,9 @@
 
         <div class="col-md-6 mb-4 pb-2">
           <div class="form-floating mb-3">
-            <mat-select class="form-control" formControlName="designation">
+            <mat-select class="form-control" formControlName="designation" multiple>
               <!-- <mat-option [value]="jobs[1].title"  >{{ jobs[1].title }}</mat-option> -->
-              <mat-option *ngFor="let job of jobs" [value]=job.title> {{ job.title}}
+              <mat-option *ngFor="let job of newJobs" [value]=job> {{ job.title}}
               </mat-option>
             </mat-select>
             <label for="country">Position</label>

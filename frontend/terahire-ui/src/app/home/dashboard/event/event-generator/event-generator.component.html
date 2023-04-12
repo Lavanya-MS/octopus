@@ -43,7 +43,7 @@
     <mat-form-field class="form-control">
       <mat-label>Candidates</mat-label>
       <mat-select [(ngModel)]="candidates" multiple>
-        <mat-option *ngFor="let candidate of candidatesList" [value]="candidate">{{candidate.fullName}}</mat-option>
+        <mat-option *ngFor="let candidate of candidatesList" [value]="candidate" >{{candidate.fullName}}</mat-option>
       </mat-select>
     </mat-form-field>
     <br>

@@ -35,7 +35,7 @@ public class JobController {
         return jobService.addNewJob(job);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN','ROLE_HM')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN','ROLE_HM','ROLE_HR')")
     @PutMapping("/update/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job job){

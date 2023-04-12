@@ -17,7 +17,7 @@ import java.util.Set;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    private long id;
 
     @Column(name = "start_date")
     String start;
@@ -35,32 +35,23 @@ public class Event {
     @JoinColumn(name="fk_job_id",referencedColumnName = "id")
     private Job job;
 
-    @OneToOne(cascade = CascadeType.ALL,targetEntity = Notification.class)
-    @JoinColumn(name="fk_notification_id",referencedColumnName = "id")
-    private Notification notification;
-  /*  @Column(name = "job_id")*/
-/*    private long job_id;*/
-
-
-
-    /*    @ManyToMany(mappedBy = "events",fetch = FetchType.LAZY)
-        @JsonBackReference
-        private Set<Candidate> candidates = new HashSet<>();*/
-    @ManyToMany(cascade = CascadeType.MERGE,targetEntity = User.class)
-    @JoinColumn(name = "fk_team_members",referencedColumnName = "id")
+    @ManyToMany(cascade = { CascadeType.MERGE},targetEntity = User.class)
+    @JoinColumn(name = "fk_team_id",referencedColumnName = "id")
     private List<User> team_members = new ArrayList<>();
+
 
     @ManyToMany(targetEntity = Candidate.class,cascade = CascadeType.MERGE)
     @JoinColumn(name="fk_candidate_id",referencedColumnName = "id")
-    private List<Candidate> candidates = new ArrayList<>();
+    private List<Candidate> candidates;
 
 
 
     public Event(){}
 
 
-    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, Notification notification, List<User> team_members, List<Candidate> candidates) {
-        Id = id;
+    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, List<User> team_members, List<Candidate> candidates) {
+
+        this.id = id;
         this.start = start;
         this.end = end;
         this.created = created;
@@ -68,17 +59,17 @@ public class Event {
         this.type = type;
         this.organizer_id = organizer_id;
         this.job = job;
-        this.notification = notification;
+
         this.team_members = team_members;
         this.candidates = candidates;
     }
 
     public long getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getStart() {
@@ -101,13 +92,6 @@ public class Event {
         return created;
     }
 
-    public Notification getNotification() {
-        return notification;
-    }
-
-    public void setNotification(Notification notification) {
-        this.notification = notification;
-    }
 
     public List<Candidate> getCandidates() {
         return candidates;

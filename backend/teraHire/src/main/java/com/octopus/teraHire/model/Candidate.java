@@ -69,14 +69,18 @@ public class Candidate {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "designation")
-    private String designation;
+
+
+    @ManyToMany(cascade = CascadeType.MERGE,targetEntity = Job.class)
+    @JoinColumn(name="fk_job_id",referencedColumnName = "id")
+    private List<Job> designation;
 
 
     protected Candidate(){}
 
 
-    public Candidate(long id, String fullName, String email, String phoneNumber, String gender, String score, String dob, String address, String country, String city, int zipcode, String nationality, int yearOfExperience, String currentCompany, String currentPosition, String currentCTC, String expectedCTC, List<String> skills, String sociaLink, String status, String designation) {
+
+    public Candidate(long id, String fullName, String email, String phoneNumber, String gender, String score, String dob, String address, String country, String city, int zipcode, String nationality, int yearOfExperience, String currentCompany, String currentPosition, String currentCTC, String expectedCTC, List<String> skills, String sociaLink, String status, List<Job> designation) {
         id = id;
         this.fullName = fullName;
         this.email = email;
@@ -108,11 +112,11 @@ public class Candidate {
         this.score = score;
     }
 
-    public String getDesignation() {
+    public List<Job> getDesignation() {
         return designation;
     }
 
-    public void setDesignation(String designation) {
+    public void setDesignation(List<Job> designation) {
         this.designation = designation;
     }
 

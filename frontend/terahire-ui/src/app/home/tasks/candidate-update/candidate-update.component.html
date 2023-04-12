@@ -110,10 +110,11 @@
 
 <div class="form-group">
   <label for="stage"><b>Designation:</b></label>
-  <mat-select type="text" [(ngModel)]="UpdatedDesignation" [value]="EditJobData.designation" class="form-control">
-    <mat-option [value]=EditJobData.designation> {{ EditJobData.designation}}
-    </mat-option>
-    <mat-option *ngFor="let item of jobs" [value]=item.title> {{ item.title}}
+  <mat-select type="text" [(ngModel)]="UpdatedDesignation" [placeholder]="convertToString(EditJobData.designation)" [value]="EditJobData.designation" class="form-control" multiple>
+    <!-- <mat-option [value]=EditJobData.designation selected> {{ EditJobData.designation[0].title}} -->
+
+
+    <mat-option *ngFor="let item of jobs" [value]=item> {{ item.title}}
     </mat-option>
   </mat-select>
 </div><br>
@@ -125,7 +126,7 @@
    
     <option value="Awaiting">Awaiting</option>
     <option value="Resume review">Resume review</option>
-    <option value="Task">Task</option>
+   
     <option value="Tech interview">Tech interview</option>
     <option value="Assessment">Assessment</option>
     <option value="Onboarding">Onboarding</option>

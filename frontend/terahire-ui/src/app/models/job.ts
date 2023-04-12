@@ -7,7 +7,7 @@ export class Job {
     droppedCandidates!:number;
     summary!:string;
     teamID!:string;
-    scoreCard!:number;
+    endDate!:string;
     createdDate:string|any;
     modifiedDate:string|any;
     id!: number;

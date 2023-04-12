@@ -25,7 +25,7 @@ export class JobListComponent implements OnInit {
   @Input()JobData!:Job
   showJobEditComponent:boolean[]=[false];
   constructor(private authService:AuthService, private jobService:JobService, private router:Router,private dialog: MatDialog) { }
-    displayedColumns: string[] = ['title','owner','status','vacancy','activeCandidates','droppedCandidates','summary','teamID','scoreCard','actions']
+  displayedColumns: string[] = ['title','owner','status','vacancy','activeCandidates','droppedCandidates','summary','teamID','endDate','actions']
   @Input() dataSource = new MatTableDataSource<Job>();
 
   userType!:string;

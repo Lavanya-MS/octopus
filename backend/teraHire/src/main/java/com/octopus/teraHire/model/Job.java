@@ -32,8 +32,8 @@ public class Job {
     private String summary;
     @Column(name="team_id")
     private String teamID;
-    @Column(name="score_card")
-    private int scoreCard;
+    @Column(name="end_date")
+    private String endDate;
     @Column(name = "created_date")
     private LocalDateTime createdDate;
     @Column(name = "modified_date")
@@ -50,7 +50,8 @@ public class Job {
     public Job() {
     }
 
-    public Job(long id, String title, String owner, List<String> stage, String status, int activeCandidates, int droppedCandidates, int vacancy, String summary, String teamID, int scoreCard, LocalDateTime createdDate, LocalDateTime modifiedDate, Notification notification) {
+    public Job(long id, String title, String owner,List<String> stage, String status, int activeCandidates, int droppedCandidates, int vacancy, String summary, String teamID, String endDate, LocalDateTime createdDate, LocalDateTime modifiedDate, Notification notification) {
+
         Id = id;
         this.title = title;
         this.owner = owner;
@@ -61,7 +62,7 @@ public class Job {
         this.vacancy = vacancy;
         this.summary = summary;
         this.teamID = teamID;
-        this.scoreCard = scoreCard;
+        this.endDate = endDate;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
         this.notification = notification;
@@ -85,6 +86,15 @@ public class Job {
 
     public Notification getNotification() {
         return notification;
+    }
+
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public void setNotification(Notification notification) {
@@ -171,11 +181,5 @@ public class Job {
         this.teamID = teamID;
     }
 
-    public int getScoreCard() {
-        return scoreCard;
-    }
 
-    public void setScoreCard(int scoreCard) {
-        this.scoreCard = scoreCard;
-    }
 }

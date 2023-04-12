@@ -12,6 +12,8 @@ public interface CandidateInterface {
     List<Candidate> getCandidateList();
     ResponseEntity deleteCandidateById(long id);
 
+    ResponseEntity getCandidatesByJobAndStatus(String jobTitle,String status);
+
 
 
 

@@ -61,8 +61,6 @@ import { AuthService } from './service/auth.service';
 })
 export class AppModule { 
     constructor(private authService:AuthService){
-    // authService.getServerStatus().subscribe(data=>{
-
-    //     })
+    authService.getServerStatus();
     }
 }

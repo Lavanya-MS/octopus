@@ -15,7 +15,10 @@
                                                 <h6 class="mb-0">TeraHire</h6>
                                                  <!-- <span >{{formattedDate |date : 'dd/MM/yyyy'}}</span> <br> <span>{{item.createdDate |date : 'dd/MM/yyyy'}}</span> --> 
                                                  <span>
-                                                     {{ calculateDiff( item.createdDate ) }} days ago</span> </div>
+
+                                                     {{ calculateDiff( item.createdDate ) == 0 ?'Today': calculateDiff( item.createdDate ) +' days ago'  }} </span> </div>
+
+
                                 </div>
                                 <!-- <div class="badge"> <span>Design</span> </div> -->
                             </div>
@@ -45,7 +48,7 @@
             </div>
 
             <!-- <div class="dropdown" #{{i}}>
-                jhnbjihbiujbinuhn
+              
             </div> -->
         </div>
 

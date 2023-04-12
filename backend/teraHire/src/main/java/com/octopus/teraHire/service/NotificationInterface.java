@@ -11,7 +11,7 @@ public interface NotificationInterface {
     ResponseEntity<List<Notification>> getNotifications();
 
 
-    ResponseEntity updateNotifications(Long id);
+    ResponseEntity updateNotifications(long id,long userId);
 
 
 }

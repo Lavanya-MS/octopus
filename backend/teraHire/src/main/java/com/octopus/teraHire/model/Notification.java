@@ -3,6 +3,7 @@ package com.octopus.teraHire.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "notification_table")
@@ -21,8 +22,9 @@ public class Notification {
     @Column(name = "notification_type")
     private int notificationType;
 
-    @Column(name = "notification_status")
-    private int notificationStatus;
+
+    @ElementCollection
+    private List<Long> userSeen;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
@@ -34,12 +36,12 @@ public class Notification {
 
     }
 
-    public Notification(long id, String title, String body, int notificationType, int notificationStatus, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public Notification(long id, String title, String body, int notificationType, List<Long> userSeen, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         Id = id;
         this.title = title;
         this.body = body;
         this.notificationType = notificationType;
-        this.notificationStatus = notificationStatus;
+        this.userSeen = userSeen;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }
@@ -76,12 +78,12 @@ public class Notification {
         this.notificationType = notificationType;
     }
 
-    public int getNotificationStatus() {
-        return notificationStatus;
+    public List<Long> getNotificationStatus() {
+        return userSeen;
     }
 
-    public void setNotificationStatus(int notificationStatus) {
-        this.notificationStatus = notificationStatus;
+    public void setNotificationStatus(List<Long> userSeen) {
+        this.userSeen = userSeen;
     }
 
     public LocalDateTime getCreatedDate() {

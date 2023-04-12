@@ -27,7 +27,7 @@ export class JobEditComponent implements OnInit {
   UpdatedJobDroppedCandidates!:number;
   UpdatedJobSummary!:string;
   UpdatedJobTeamID!:string;
-  UpdatedJobScoreCard!:number;
+  UpdatedJobScoreCard!:string;
   UpdatedJobVacancy!:number;
   
   ngOnInit(){
@@ -39,7 +39,7 @@ export class JobEditComponent implements OnInit {
     this.UpdatedJobDroppedCandidates=this.EditJobData.droppedCandidates;
     this.UpdatedJobSummary=this.EditJobData.summary;
     this.UpdatedJobTeamID=this.EditJobData.teamID;
-    this.UpdatedJobScoreCard=this.EditJobData.scoreCard;
+    this.UpdatedJobScoreCard=this.EditJobData.endDate;
     this.UpdatedJobVacancy=this.EditJobData.vacancy;
   }
   /**
@@ -57,15 +57,17 @@ export class JobEditComponent implements OnInit {
       droppedCandidates:this.UpdatedJobDroppedCandidates,
       summary:this.UpdatedJobSummary,
       teamID:this.UpdatedJobTeamID,
-      scoreCard:this.UpdatedJobScoreCard,
+      endDate:this.UpdatedJobScoreCard,
       id:this.EditJobData.id,
       createdDate:null,
       modifiedDate:null,
       vacancy:this.UpdatedJobVacancy
     }
+
+    console.log(UpdatedJobData)
     this.jobService.updateJob(UpdatedJobData).subscribe(data=>{
       this.snackBar.open("Successfully Updated!!",'',{duration:3000})
-      console.log(data)
+      //console.log(data)
       
     });
     

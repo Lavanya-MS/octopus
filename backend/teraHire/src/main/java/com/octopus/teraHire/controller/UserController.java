@@ -68,7 +68,7 @@ public class UserController {
     //{return userService.getUserById(id);}
 
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_HR','ROLE_HM','ROLE_IN')")
     @GetMapping(value = "/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email)
     {return userService.getUserByEmail(email);}

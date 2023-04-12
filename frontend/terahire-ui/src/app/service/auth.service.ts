@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { auth } from '../models/auth.model';
 import { SharedService } from './shared.service';
 import { UserService } from './user.service';
+import { user } from '../models/user.model';
 
 
 
@@ -33,6 +34,13 @@ export class AuthService {
     return localStorage.getItem("currentUser");
 }
 
+
+public  getUserId():string{
+ 
+  let data = JSON.parse(localStorage.getItem("currentUser")!);
+  return data.username;
+ 
+}
 
 // getUserDetails(){
 //   let data:any = localStorage.getItem("currentUser");

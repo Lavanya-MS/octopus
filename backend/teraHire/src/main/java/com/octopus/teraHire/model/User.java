@@ -14,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long Id;
 
     @Column(name = "username")
     private String username;
@@ -45,7 +45,7 @@ public class User {
 
 
     public User(long id, String username, String email, String password, String firstName, String lastName, String phoneNumber,int statusId,int userTypeId) {
-        id = id;
+        Id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -58,11 +58,11 @@ public class User {
     }
 
     public long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(long id) {
-        id = id;
+        Id = id;
     }
 
     public String getUsername() {

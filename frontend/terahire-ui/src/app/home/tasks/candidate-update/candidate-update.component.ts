@@ -45,7 +45,7 @@ export class CandidateUpdateComponent implements OnInit {
   UpdatedStatus!: string
   UpdatedGender!:string
   UpdatedSocialLink!:string
-  UpdatedDesignation!:string
+  UpdatedDesignation!:Job[]
   score!:string;
 
 
@@ -131,6 +131,13 @@ export class CandidateUpdateComponent implements OnInit {
     // window.location.reload();
 
 
+  }
+  convertToString(v):string{
+    let data = "";
+    v.forEach(value=>{
+      data = data+ " "+value.title;
+    })
+    return data;
   }
   getSkills() {
     this.SkillsetService.getSkillSet().subscribe(data => {

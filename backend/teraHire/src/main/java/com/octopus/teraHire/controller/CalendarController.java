@@ -33,20 +33,10 @@ public class CalendarController {
 
 
 
-    /*@RequestMapping("/testevent")
-    @ResponseBody
-    String home() {
-        return "Welcome!";
-    }
-    @GetMapping("/events")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    Iterable<Event> events(@RequestParam("start")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime start, @RequestParam("end")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
-        return eventRepository.findBetween(start, end);
-    }*/
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
     @CrossOrigin("*")
     @PostMapping("/new")
-    public ResponseEntity<Event> addAnEvent(@RequestBody @Valid Event event){
+    public ResponseEntity<Event> addAnEvent(@RequestBody  Event event){
         return eventService.createEvent(event);
     }
 

@@ -42,9 +42,11 @@ public class CandidateController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HM','ROLE_IN','ROLE_HR')")
     @GetMapping(value = "/{status}")
-    public ResponseEntity<List<Candidate>> getCandidateByStatus(@PathVariable String status){
+    public ResponseEntity<List<Candidate>> getCandidateByStatus(@PathVariable("status") String status){
         return candidateService.getCandidatesByStatus(status);
     }
+
+
 
     @DeleteMapping (value="delete/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")

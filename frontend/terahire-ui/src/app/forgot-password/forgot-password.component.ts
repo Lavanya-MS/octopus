@@ -30,18 +30,22 @@ export class ForgotPasswordComponent implements OnInit {
     
     var formData = this.forgotPasswordForm.value;
    // console.log(formData.email);
-    this._passwordService.forgotPassword(formData.email).subscribe((value:any)=>{
-      this.validEmail = true;
+    this._passwordService.forgotPassword(formData.email).subscribe((value)=>{
+      console.log(value)
+      if(value.status == 'Generated Token'){
+        this.validEmail = true;
         this._snackBar.open("Submitted successfully, Check your mailbox",'',{duration:3000})
+      }else{
+        this.validEmail = false;
+        this._snackBar.open("Email not found.",'',{duration:3000})
+      }
       
     },(err)=>{
       // console.log(err.status);
-      if(err.status){
+     
         this.validEmail=false;
-        this._snackBar.open("Invalid email!",'',{duration:3000})
-      }
-      else{
-      }
+        this._snackBar.open("Email not found.",'',{duration:3000})
+     
 
     });
   }

@@ -5,6 +5,7 @@ import com.octopus.teraHire.exception.UserExistsException;
 import com.octopus.teraHire.model.Job;
 import com.octopus.teraHire.repository.JobRepository;
 import com.octopus.teraHire.repository.UserRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -36,6 +37,8 @@ public class JobService implements JobInterface{
     public List<Job> getJobList(){
         return jobRepository.findAll();
     }
+
+
     @Override
     @Transactional
     public ResponseEntity addNewJob(Job job){
@@ -68,7 +71,7 @@ public class JobService implements JobInterface{
             updatedJobDetails.setVacancy((job.getVacancy()));
             updatedJobDetails.setSummary((job.getSummary()));
             updatedJobDetails.setTeamID((job.getTeamID()));
-            updatedJobDetails.setScoreCard((job.getScoreCard()));
+            updatedJobDetails.setEndDate(job.getEndDate());
             return new ResponseEntity<>(jobRepository.save(updatedJobDetails),HttpStatus.OK);
         }
         else{

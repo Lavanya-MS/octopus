@@ -53,9 +53,7 @@ export class EventGeneratorComponent implements OnInit {
   }
   
   private getAllJobs(){
-    this._jobService.getJobList().subscribe(data=>{
-      this.jobList=data;
-    })
+    this.jobList = this._jobService.getActiveJobs();
   }
 
  

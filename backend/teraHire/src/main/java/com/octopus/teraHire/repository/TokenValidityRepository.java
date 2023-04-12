@@ -8,11 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface TokenValidityRepository extends JpaRepository<TokenValidity,Long> {
+
     TokenValidity findByToken(String token);
     TokenValidity findByUser(User user);
-    @Query("select t from TokenValidity t where t.user.id = ?1")
+    @Query("select t from TokenValidity t where t.user.Id = ?1")
     TokenValidity FindTokenbyUserId(long id);
-    TokenValidity findByUser_Id(long Id);
+
+    @Query("select user from User user where user.Id = ?1")
+    TokenValidity findByUser_Id(long id);
+
+
     @Override
     TokenValidity getReferenceById(Long aLong);
 

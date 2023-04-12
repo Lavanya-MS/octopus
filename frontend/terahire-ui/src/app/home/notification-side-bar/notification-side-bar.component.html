@@ -9,10 +9,10 @@
         <div class="list-group list-group-flush mx-3 mt-4">
 
            
-            <ul class="list-group list-group-light"  *ngFor="let item of nList" >
+            <ul class="list-group list-group-light"  *ngFor="let item of nList,index as i" >
               
-                <li (click)="updateNotification(item.id)" class="list-group-item d-flex justify-content-between align-items-center" [ngClass]="{'seen':item.notificationType == 1,
-                'unseen':item.notificationType == 0}"  >
+                <li (click)="updateNotification(item.id,userId)" class="list-group-item d-flex justify-content-between align-items-center" [ngClass]="{'seen':isSeen(i),
+                'unseen':!(isSeen(i))}"  >
                   <div class="d-flex align-items-center">
                     <div class="ms-3">
                       <p class="fw-bold mb-1">{{ item.title }} </p>

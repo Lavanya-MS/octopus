@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { FloatLabelType } from '@angular/material/form-field';
@@ -13,6 +13,7 @@ import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 
 // import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 import { Candidate } from 'src/app/models/candidate';
+import { Job } from 'src/app/models/job';
 import { user } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { CandidateService } from 'src/app/service/candidate.service';
@@ -37,7 +38,8 @@ export class CandidateComponent implements OnInit {
   message!: string;
   isAlert = false;
   countries: any[] = [];
-  jobs: any[] = [];
+  @Input() newJobs!:Job[];
+
   skill: any[] = [];
   
   @Output() candidateChange = new EventEmitter();
@@ -64,7 +66,7 @@ export class CandidateComponent implements OnInit {
   ngOnInit() {    
    
     this.getCountries();
-    this.getJobs();
+   
     this.getSkills();
     this.candidateForm = new FormGroup({
 
@@ -252,13 +254,7 @@ export class CandidateComponent implements OnInit {
     })
   }
 
-  getJobs() {
-    this.jobService.getJobList().subscribe((data: any[]) => {
-      this.jobs = data;
-      // console.log(data)
-    })
 
-  }
   getSkills() {
     this.SkillsetService.getSkillSet().subscribe((data: any[]) => {
       this.skill = data;

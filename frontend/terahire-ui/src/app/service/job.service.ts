@@ -10,6 +10,8 @@ import { SharedService } from './shared.service';
   providedIn: 'root'
 })
 export class JobService {
+
+  private activeJobs:Job[]=[];
   private baseURL= this.sharedService.getServerLink()+"/api/job";
   
   constructor(private httpClient: HttpClient,private sharedService:SharedService) {}
@@ -19,6 +21,27 @@ export class JobService {
   getJobList():Observable<any>{
     
     return this.httpClient.get(this.baseURL+'/list');
+  }
+
+  getActiveJobs():Job[]{
+   
+    this.getJobList().subscribe((data:Job[])=>{
+      data.forEach((v,i)=>{
+        if( this.calculateDiff(v.endDate) <= 0 || v.status == "Expired"){
+         this.activeJobs.push(v);
+        }else{
+          
+        }
+      })
+    })
+    return this.activeJobs;
+  }
+
+  calculateDiff(dateSent){
+    let currentDate = new Date(); 
+    dateSent = new Date(dateSent);
+    //console.log(Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24)))
+   return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
   }
   createJob(job:Job):Observable<any>{
     

@@ -25,9 +25,9 @@ public class NotificationController {
         return notificationService.getNotifications();
     }
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR','ROLE_IN','ROLE_HM')")
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{id}/{userId}")
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity updateNotification(@PathVariable Long id){
-        return notificationService.updateNotifications(id);
+    public ResponseEntity updateNotification(@PathVariable("id") long id,@PathVariable("userId") long userId){
+        return notificationService.updateNotifications(id,userId);
     }
 }
