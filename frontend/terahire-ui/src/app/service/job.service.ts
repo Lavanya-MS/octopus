@@ -24,10 +24,10 @@ export class JobService {
   }
 
   getActiveJobs():Job[]{
-   
+   this.activeJobs = [];
     this.getJobList().subscribe((data:Job[])=>{
       data.forEach((v,i)=>{
-        if( this.calculateDiff(v.endDate) <= 0 || v.status == "Expired"){
+        if( v.status == "Active"){
          this.activeJobs.push(v);
         }else{
           

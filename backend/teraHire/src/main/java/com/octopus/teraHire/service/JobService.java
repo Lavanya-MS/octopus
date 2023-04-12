@@ -12,7 +12,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.Date;
 import java.util.List;
 
 
@@ -33,8 +37,31 @@ public class JobService implements JobInterface{
         LocalDateTime now = LocalDateTime.now();
         return now;
     }
+    public LocalDate getDateOnly(){
+        LocalDate now = LocalDate.now();
+        return now;
+    }
+
     @Override
     public List<Job> getJobList(){
+        jobRepository.findAll().stream()
+                .forEach(job -> {
+                    //SimpleDateFormat formattter = new SimpleDateFormat("yyyy-mm-dd");
+                    LocalDate date = LocalDate.parse(job.getEndDate());
+                    boolean isExpired = !(Period.between(date,getDateOnly()).isNegative());
+                    if(isExpired && !job.getStatus().equals("Expired")){
+                        job.setModifiedDate(getDate());
+                        job.setStatus("Expired");
+                        jobRepository.save(job);
+                    }
+                    else if(!job.getStatus().equals("Inactive") && !isExpired){
+                        job.setModifiedDate(getDate());
+                        job.setStatus("Active");
+                        jobRepository.save(job);
+                    }else{
+                       
+                    }
+                });
         return jobRepository.findAll();
     }
 

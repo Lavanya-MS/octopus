@@ -15,7 +15,7 @@ import { UserService } from 'src/app/service/user.service';
 export class DashboardComponent implements OnInit {
 
   constructor(private jobService:JobService,private candidateService:CandidateService,private authService:AuthService,private userService:UserService) { }
-  jobList!:Job[];
+  jobList:Job[]=[];
   candidateList!:Candidate[];
 
   currentUser!:user;
@@ -40,10 +40,15 @@ export class DashboardComponent implements OnInit {
 
   }
   getJobs(){
-    this.jobService.getJobList().subscribe(data=>{
+    this.jobService.getJobList().subscribe((data:Job[])=>{
+      let count =0;
       //console.log(data)
-      this.jobList = data;
-      this.jobList.slice(4)
+     data.forEach(v=>{
+      if(v.status.includes("Active") && count <= 4){
+        this.jobList.push(v);
+        count++;
+      }
+     })
     })
   }
 

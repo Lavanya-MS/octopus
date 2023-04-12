@@ -85,7 +85,7 @@
 
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mb-3">
-                                        <input type="number" class="form-control" formControlName="vacancy"
+                                        <input type="number" min="0" class="form-control" formControlName="vacancy"
                                             placeholder="name@example.com"
                                             [ngClass]="{ 'is-invalid': submitted && f.vacancy.errors }">
                                         <label for="floatingInput">Vacancy</label>
@@ -116,7 +116,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mb-3">
-                                        <input type="number" min="0" class="form-control" formControlName="droppedCandidates"
+                                        <input type="number" min="0" class="form-control" formControlName="droppedCandidates" value="0"
                                             placeholder="droppedCandidates"
                                             [ngClass]="{ 'is-invalid': submitted && f.droppedCandidates.errors }">
                                         <label for="floatingInput">Dropped Candidates</label>

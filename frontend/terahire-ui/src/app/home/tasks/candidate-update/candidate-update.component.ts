@@ -154,10 +154,8 @@ export class CandidateUpdateComponent implements OnInit {
     })
   }
   getJobs() {
-    this.jobService.getJobList().subscribe(data => {
-      this.jobs = data;
-  //    console.log(data)
-    })
+    this.jobs =[];
+   this.jobs = this.jobService.getActiveJobs()
 
   }
 
