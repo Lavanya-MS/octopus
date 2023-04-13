@@ -54,12 +54,12 @@ public class JobService implements JobInterface{
                         job.setStatus("Expired");
                         jobRepository.save(job);
                     }
-                    else if(!job.getStatus().equals("Inactive") && !isExpired){
+                    else if(!job.getStatus().equals("Active") && !isExpired){
                         job.setModifiedDate(getDate());
                         job.setStatus("Active");
                         jobRepository.save(job);
                     }else{
-                       
+
                     }
                 });
         return jobRepository.findAll();

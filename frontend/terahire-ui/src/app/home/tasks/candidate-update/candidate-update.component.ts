@@ -89,6 +89,10 @@ export class CandidateUpdateComponent implements OnInit {
  their respective services. These methods are called in the `ngOnInit()` method to populate the
  dropdowns in the form. */
   UpdateJobDetails() {
+    if(this.UpdatedYOE==0 && (this.UpdatedCurrentCompany || this.UpdatedCurrentPosition || this.UpdatedCurrentCTC)){
+      this.snackBar.open("Year of experience cannot be zero",'',{duration:4000})
+    }
+    else{
 
     let UpdatedCandidateData: Candidate = {
       id: this.EditJobData.id,
@@ -104,7 +108,7 @@ export class CandidateUpdateComponent implements OnInit {
       nationality: this.UpdatedNationality,
       yearOfExperience: this.UpdatedYOE,
       currentCompany: this.UpdatedCurrentCompany,
-      currentPosition: this.UpdatedCurrentCompany,
+      currentPosition: this.UpdatedCurrentPosition,
       currentCTC: this.UpdatedCurrentCTC,
       expectedCTC: this.UpdatExpectedCTC,
       skills: this.UpdatedSkills,
@@ -130,7 +134,7 @@ export class CandidateUpdateComponent implements OnInit {
     // alert("Updated");
     // window.location.reload();
 
-
+  }
   }
   convertToString(v):string{
     let data = "";
@@ -156,7 +160,6 @@ export class CandidateUpdateComponent implements OnInit {
   getJobs() {
     this.jobs =[];
    this.jobs = this.jobService.getActiveJobs()
-
   }
 
 }
